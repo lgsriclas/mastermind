@@ -3,8 +3,27 @@ class Turn
   def initialize
   end
 
-  def guess_to_array(guess) #call in the initialize method
-    guess.split   #.downcase #.to_a
+  def secret_code_iteration(secret_code)
+
+  end
+
+  def guess_to_array(guess)
+    guess.downcase.split("")
+  end
+
+  def guess_validation(guess)
+    if guess_to_array(guess).length < 4
+      "Guess is too short, try again!"
+    elsif guess_to_array(guess).length > 4
+      "Guess is too long, try again!"
+    elsif guess_to_array(guess).delete("rgby").empty? == false
+      "Your input had invalid characters."
+    else
+      # whatever method comes next!!!
+    end
+
+  def guess_iteration(guess)
+
   end
 
 #secret code = rggb  guess = yrbg
@@ -14,8 +33,6 @@ class Turn
     array.each_with_index {|val, index|}
     #does this evaluate both at the same time?
 
-    guess1 = guess_to_array(guess)
-    2 #returns an integer
 
 
   end
