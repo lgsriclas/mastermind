@@ -13,7 +13,7 @@ class Game
   end
 
   def play_game
-    p "hello"
+    
   end
 
 end

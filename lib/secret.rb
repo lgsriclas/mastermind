@@ -1,4 +1,7 @@
 class Secret
+
+  attr_reader  :secret_code
+
   def initialize
     @secret_code = generate_secret_code
   end
