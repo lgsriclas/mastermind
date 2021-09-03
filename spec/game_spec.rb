@@ -7,8 +7,8 @@ RSpec.describe Game do
     expect(game).to be_an_instance_of(Game)
   end
 
-  it 'has a play start' do
+  it 'has a start' do
     game = Game.new
-    expect(game.start).to eq(p)
+    expect(game.start).to eq()
   end
 end
