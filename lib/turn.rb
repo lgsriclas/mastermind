@@ -16,21 +16,22 @@ class Turn
       "Guess is too short, try again!"
     elsif guess_to_array(guess).length > 4
       "Guess is too long, try again!"
-    elsif guess_to_array(guess).delete("rgby").empty? == false
+    elsif guess_to_array(guess).delete("r", "g", "b", "y").any? == true
       "Your input had invalid characters."
     else
       # whatever method comes next!!!
     end
-
-  def guess_iteration(guess)
-
   end
+
+  #def guess_iteration(guess)
+
+#  end
 
 #secret code = rggb  guess = yrbg
 #element loop and index loop
   def evaluate_index(secret_code, guess)
     #compare index postions
-    array.each_with_index {|val, index|}
+    #array.each_with_index {|val, index|}
     #does this evaluate both at the same time?
 
 
