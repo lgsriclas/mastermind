@@ -24,13 +24,13 @@ RSpec.describe Turn do
     expect(turn.guess_validation(guess_1)).to eq("Guess is too long, try again!")
   end
 
-  it 'can verify guess: invalid characters' do
+  xit 'can verify guess: invalid characters' do
     turn = Turn.new
-    guess_1 = "rgvo"
+    guess_1 = "rvgo"
     expect(turn.guess_validation(guess_1)).to eq("Your input had invalid characters.")
   end
 
-  xit 'returns correct index position' do
+  it 'returns correct index position' do
     turn = Turn.new
     a = turn.evaluate_index(["r", "g", "g", "b"], ["y", "r", "b", "g"])
     expect(a).to be_a(Integer)
