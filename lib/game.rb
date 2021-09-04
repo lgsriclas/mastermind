@@ -1,10 +1,11 @@
 require './mastermind'
 
 class Game
-  attr_reader :i, :q
+  attr_reader :i, :q, :turn_counter
   def initialize
     @i = "Instructions"
     @q = "You don't like our game???"
+    @turn_counter = 0
   end
 
 
@@ -27,5 +28,18 @@ class Game
 
   def play_game
   end
+
+  def cheat
+    @secret_code
+  end
+
+  def end_game
+  end
+
+  def end_game_message
+    p "Congratulations! You guessed the sequence 'GRRB' in #{guesses} guesses over #{minutes} minutes,
+      #{seconds} seconds. Do you want to (p)lay again or (q)uit?""
+  end
+
 
 end
