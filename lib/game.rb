@@ -1,16 +1,22 @@
 require './mastermind'
+require './lib/turn'
 
 class Game
   attr_reader :i, :q, :turn_counter
   def initialize
     @i = "Instructions"
-    @q = "You don't like our game???"
+    @q = "You have quit Mastermind."
     @turn_counter = 0
   end
 
 
   def start
     gets.chomp
+    begin
+      
+    rescue ExceptionName
+
+    end
     if p
       p
       play_game
@@ -27,6 +33,7 @@ class Game
   end
 
   def play_game
+    turn = Turn.new
   end
 
   def cheat
@@ -36,10 +43,12 @@ class Game
   def end_game
   end
 
+  def guesses
+    @turn_counter += 1
+  end
+
   def end_game_message
     p "Congratulations! You guessed the sequence 'GRRB' in #{guesses} guesses over #{minutes} minutes,
       #{seconds} seconds. Do you want to (p)lay again or (q)uit?""
   end
-
-
 end
