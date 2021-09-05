@@ -1,8 +1,11 @@
+require './lib/game'
+require './runner/mastermind'
+
 class Secret
 
   attr_reader  :secret_code
   def initialize
-    @secret_code = secret_code  
+    @secret_code = secret_code
   end
 
   def generate_secret_code
