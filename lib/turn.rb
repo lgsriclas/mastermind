@@ -24,13 +24,13 @@ class Turn
   end
 
   def evaluate_index(secret_code, guess)
-    correct_counter = 0
+    correct_index_counter = 0
     secret_code.each_with_index do |letter, i|
       if guess[i] == letter
-        correct_counter += 1
+        correct_index_counter += 1
       end
     end
-    correct_counter
+    correct_index_counter
   end
 
 
@@ -38,13 +38,13 @@ class Turn
     second_array = guess_to_array(guess)
     evaluate = secret_code.&(second_array)
     evaluate.count
+    correct_element_counter = evaluate.count
     end
+
+  def output_to_player
+    p "#{guess} has #{correct_element_counter} of the correct elements
+    with #{correct_index_counter} in the correct positions.
+    You have taken #{@guess_counter} guess."
+
+  end
 end
-
-
-
-
-#   def evaluate_method
-#     #call previous methods and return amount correct for both
-#
-#   end

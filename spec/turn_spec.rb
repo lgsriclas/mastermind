@@ -30,13 +30,13 @@ RSpec.describe Turn do
     expect(turn.guess_validation(guess_1)).to eq("Your input had invalid characters.")
   end
 
-  it 'returns correct index position' do
+  it 'evaluate index: returns correct number of index positions' do
     turn = Turn.new
     a = turn.evaluate_index(["r", "g", "g", "b"], ["y", "r", "b", "g"])
     expect(a).to eq(0)
   end
 
-  it 'returns correct index position' do
+  it 'evaluate index: returns correct number of index positions' do
     turn = Turn.new
     b = turn.evaluate_index(["r", "g", "g", "b"], ["r", "r", "b", "b"])
     expect(b).to eq(2)
