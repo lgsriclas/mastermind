@@ -24,7 +24,7 @@ RSpec.describe Turn do
     expect(turn.guess_validation(guess_1)).to eq("Guess is too long, try again!")
   end
 
-  xit 'can verify guess: invalid characters' do
+  it 'can verify guess: invalid characters' do
     turn = Turn.new
     guess_1 = "rvgo"
     expect(turn.guess_validation(guess_1)).to eq("Your input had invalid characters.")
@@ -47,13 +47,14 @@ RSpec.describe Turn do
     expect(b).to be_a(2)
   end
 
-  xit 'returns correct element number' do
+  it 'returns correct element number' do
     turn = Turn.new
-    a = turn.evaluate_method(["r", "g", "g", "b"], ["y", "r", "b", "g"])
-    expect(a).to be_a(3)
+    a = turn.evaluate_element(["r", "g", "g", "b"], "yrbg")
 
-    b = turn.evaluate_method(["r", "g", "g", "b"], ["r", "r", "b", "b"])
-    expect(b).to be_a(2)
+    expect(a).to eq(3)
+
+    b = turn.evaluate_element(["r", "g", "g", "b"], "rrbb")
+    expect(b).to eq(2)
   end
 
 end

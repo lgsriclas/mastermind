@@ -16,7 +16,7 @@ class Turn
       "Guess is too short, try again!"
     elsif guess_to_array(guess).length > 4
       "Guess is too long, try again!"
-    elsif guess_to_array(guess).delete(["r", "g", "b", "y"]).empty? == false
+    elsif guess.match?(/[^"r", "g", "b", "y"]/)
       "Your input had invalid characters."
     else
       # whatever method comes next!!!
@@ -38,10 +38,21 @@ class Turn
 
   end
 #
-#   def evaluate_element(secret_code, guess)
-#     #evaluates elements
-#   end
-#
+  def evaluate_element(secret_code, guess)
+    second_array = guess_to_array(guess)
+    correct_elements = (secret_code - second_array).count
+    4 - correct_elements
+
+    require "pry"; binding.pry
+
+# secret_code = ["r", "r", "b", "y"]
+# guess_to_array(guess) = ["r", "b", "b", "y"]
+# secret_code - guess_to_array(guess)
+# ["r"].count => 1
+# 4 - 1
+
+  end
+
 #   def evaluate_method
 #     #call previous methods and return amount correct for both
 #
