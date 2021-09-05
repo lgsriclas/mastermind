@@ -3,7 +3,7 @@ require './lib/secret'
 require './lib/turn'
 
 class Game
-  attr_reader :turn_counter, :secret, :user_input, :start_time, :end_time, :player_guess, :game_time
+  attr_reader :turn_counter, :secret, :user_input, :start_time, :end_time, :player_guess, :game_time, :player_input
   def initialize
     @guess_counter = 0
     @secret = []
@@ -11,6 +11,7 @@ class Game
     @start_time = start_time
     @end_time = end_time
     @game_time = game_time
+    @player_input = gets.chomp.downcase!
   end
 
   def instructions
@@ -22,19 +23,19 @@ class Game
   end
 
   def start_game
-    player_input = gets.chomp.downcase
-    if user_input == "p"
+    player_input = gets.chomp.downcase!
+    if player_input == "p"
       play_game
-    elsif user_input == "i"
+    elsif player_input == "i"
       p instructions
       start_game
-    elsif user_input == "q"
+    elsif player_input == "q"
       p quit
       exit
-    elsif user_input == "c"
+    elsif player_input == "c"
       p cheat
     end
-    player_input
+    @player_input
   end
 
   def set_start_time

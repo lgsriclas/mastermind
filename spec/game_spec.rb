@@ -21,7 +21,7 @@ RSpec.describe Game do
 
   it 'has a game start' do
     game = Game.new
-    expect(game.start_game).to eq(@user_input)
+    expect(game.start_game).to eq(player_input)
   end
 
   it 'has a start time' do
