@@ -1,13 +1,12 @@
-# require './mastermind'
-
+require './mastermind'
+require './lib/secret'
 
 class Game
-  attr_reader :turn_counter, :secret, :user_input, :start_time, :end_time, :game_time
-  # , :player_input
+  attr_reader :turn_counter, :secret, :start_time, :end_time, :game_time, :player_guess
   def initialize
     @guess_counter = 0
-    @secret = []
-    #@player_guess = play
+    @secret = secret
+    @player_guess = player_guess
     @start_time = start_time
     @end_time = end_time
     @game_time = game_time
@@ -22,24 +21,30 @@ class Game
     "You have quit Mastermind"
   end
 
-  def start_game
+  def start_message
     p "Welcome to MASTERMIND! Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
-    #gets.chomp
-    @player_input = gets.chomp.downcase
+  end
 
+  def start_game
+    p start_message
+    start_game_input
+  end
 
-    if @player_input == "p"
+  def start_game_input
+    player_input = gets.chomp.downcase
+    if player_input == "p"
       play_game
-    elsif @player_input == "i"
+    elsif player_input == "i"
       p instructions
-      start_game
-    elsif @player_input == "q"
+      start_game_input
+    elsif player_input == "q"
       p quit
       exit
-    elsif @player_input == "c"
+    elsif player_input == "c"
       p cheat
+      start_game_input
     end
-    # @player_input
+
   end
 
   def set_start_time
@@ -60,11 +65,8 @@ class Game
     set_start_time
 
     p  "I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game. What's your guess?"
-    @player_guess = gets.chomp.downcase
-    require "pry"; binding.pry
+    @player_guess = gets.chomp.downcase!
   end
-
-
 
   def set_secret_code
     @secret = Secret.new
