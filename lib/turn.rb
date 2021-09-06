@@ -41,10 +41,13 @@ class Turn
     correct_element_counter = evaluate.count
     end
 
-  def output_to_player
-    p "#{guess} has #{correct_element_counter} of the correct elements
-    with #{correct_index_counter} in the correct positions.
-    You have taken #{@guess_counter} guess."
 
+  def total_output_to_player
+    x = evaluate_index(secret_code, guess)
+    y = evaluate_element(secret_code, guess)
+        require "pry"; binding.pry
+    p "#{guess} has #{y} of the correct elements
+    with #{x} in the correct positions.
+    You have taken #{@guess_counter} guesses."
   end
 end
