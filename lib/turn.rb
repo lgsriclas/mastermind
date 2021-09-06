@@ -1,9 +1,6 @@
 class Turn
 
   def initialize
-  end
-
-  def secret_code_iteration(secret_code)
 
   end
 

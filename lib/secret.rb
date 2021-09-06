@@ -1,5 +1,5 @@
-require './lib/game'
-require './runner/mastermind'
+#require './lib/game'
+
 
 class Secret
 
