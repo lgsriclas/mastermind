@@ -1,8 +1,8 @@
 require './lib/game'
+require './lib/secret'
+require './lib/turn'
 
-p "Welcome to MASTERMIND! Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
-gets.chomp
-game.start
+
 
 game = Game.new
-game.start()
+game.start_game
