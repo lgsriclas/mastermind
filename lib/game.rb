@@ -1,15 +1,16 @@
 require './mastermind'
 require './lib/secret'
+require './lib/turn'
 
 class Game
   attr_reader :turn_counter, :secret, :start_time, :end_time, :game_time, :player_guess
   def initialize
     @guess_counter = 0
-    @secret = secret
     @player_guess = player_guess
     @start_time = start_time
     @end_time = end_time
     @game_time = game_time
+    @secret = Secret.new
     @turn = Turn.new
   end
 

@@ -1,4 +1,4 @@
-#require './lib/game'
+require './lib/game'
 
 
 class Secret

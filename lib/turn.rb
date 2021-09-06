@@ -1,3 +1,6 @@
+require './lib/game'
+require './lib/secret'
+
 class Turn
 
   def initialize

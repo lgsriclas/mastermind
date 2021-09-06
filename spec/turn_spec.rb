@@ -1,6 +1,7 @@
 require 'rspec'
 require './lib/turn'
-#require './lib/secret'
+require './lib/secret'
+require './lib/game'
 
 RSpec.describe Turn do
 
