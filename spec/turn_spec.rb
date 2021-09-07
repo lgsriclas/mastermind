@@ -52,4 +52,12 @@ RSpec.describe Turn do
       expect(b).to eq(2)
   end
 
+  it 'can output total message' do
+    turn = Turn.new
+    y = turn.evaluate_element(["r", "g", "g", "b"], "yrbg")
+    expect(y).to eq(3)
+    b = turn.evaluate_index(["r", "g", "g", "b"], ["y", "r", "b", "g"])
+    expect(b).to eq(0)
+  end
+
 end

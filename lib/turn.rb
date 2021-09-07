@@ -13,10 +13,8 @@ class Turn
       "Guess is too short, try again!"
     elsif guess_to_array(guess).length > 4
       "Guess is too long, try again!"
-    elsif guess.match?(/[^"r", "g", "b", "y"]/)
+    else guess.match?(/[^"r", "g", "b", "y"]/)
       "Your input had invalid characters."
-    else
-      # whatever method comes next!!!
     end
   end
 
@@ -36,13 +34,12 @@ class Turn
     evaluate = secret_code.&(second_array)
     evaluate.count
     correct_element_counter = evaluate.count
-    end
+  end
 
 
-  def total_output_to_player
+  def total_output_to_player(secret_code, guess)
     x = evaluate_index(secret_code, guess)
     y = evaluate_element(secret_code, guess)
-        require "pry"; binding.pry
     p "#{guess} has #{y} of the correct elements
     with #{x} in the correct positions.
     You have taken #{@guess_counter} guesses."
