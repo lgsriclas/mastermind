@@ -20,22 +20,10 @@ RSpec.describe Game do
     expect(game.quit).to eq("You have quit Mastermind")
   end
 
-  it 'has a start time' do
-    game = Game.new
-    game.set_start_time
-    expect(game.set_start_time).to be_a(Float)
-  end
-
-  it 'has an end time' do
-    game = Game.new
-    game.set_end_time
-    expect(game.set_end_time).to be_a(Float)
-  end
-
   it 'can calculate the length of a game' do
     game = Game.new
     game.calculate_game_time
-    expect(game.calculate_game_time).to be_a(Float)
+    expect(game.calculate_game_time).to be_a(String)
   end
 
   it 'sets a secret code' do
@@ -54,7 +42,7 @@ RSpec.describe Game do
 
   it 'counts the number of guesses' do
     game = Game.new
-    expect(game.guess).to eq(1)
+    expect(game.player_guess).to eq(1)
   end
 
   it 'has an end' do
