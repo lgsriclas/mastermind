@@ -9,11 +9,12 @@ class Game
     @guess = gets.chomp.downcase!
     @start_time = Time.now
     @secret = Secret.new
-    @turn = Turn.new
+    @turn = Turn.new(@secret)
   end
 
   def instructions
-     "Instructions"
+     "Instructions: I have generated a beginner sequence with four elements made up of: (r)ed,
+     (g)reen, (b)lue, and (y)ellow. The sequence can be generated in any order and in any position.  The same element can also be used more than once.  Make your guess, and I will respond with how many elements you guessed correctly and the correct number of element positions you guessed correctly.  This information can then be used for you to formulate a new guess.  I will keep track of the number of guesses and the time it takes you to guess correctly.  Use (c)heat to receive the generated sequence or (q)uit at any time to end the game.  Good luck!"
   end
 
   def quit
@@ -56,17 +57,15 @@ class Game
 
   def play_game
     set_secret_code
-    p  "I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game. What's your guess?"
-    @guess = gets.chomp.downcase!
-    if @guess == "q"
+    p  "I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game. Press g to play and then enter your guess."
+    player_input = gets.chomp.downcase!
+    if player_input == "q"
       p quit
       exit
-    elsif @guess == "i"
+    elsif player_input == "i"
       p instructions
-    elsif @guess == @turn.guess_to_array
-      set_start_time
-      add_guess
-      @turn
+    elsif player_input == "g"
+      evaluate_player_guess
     end
   end
 
@@ -79,9 +78,14 @@ class Game
     @secret.secret_code
   end
 
-  def player_guess
-    @guess = gets.chomp.downcase
+  def evaluate_player_guess
+    @guess = gets.chomp.downcase!
+    guess_to_array
+    guess_validation
+    evaluate_index
+    evaluate_element
     add_guess
+    total_output_to_player
   end
 
   def add_guess

@@ -1,4 +1,5 @@
 require './lib/game'
+require './lib/turn'
 
 
 class Secret

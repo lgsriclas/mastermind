@@ -2,7 +2,7 @@ require 'rspec'
 require './mastermind'
 require './lib/game'
 require './lib/secret'
-#require './lib.turn'
+require './lib.turn'
 
 RSpec.describe Game do
   it 'exists' do

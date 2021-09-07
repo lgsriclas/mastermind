@@ -3,8 +3,8 @@ require './lib/secret'
 
 class Turn
 
-  def initialize
-
+  def initialize(secret)
+    @secret = secret
   end
 
   def guess_to_array(guess)
