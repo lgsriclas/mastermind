@@ -7,8 +7,8 @@ class Game
   def initialize
     @guess_counter = 0
     @player_guess = player_guess
-    @start_time = start_time
-    @end_time = end_time
+    @start_time = Time.now
+    @end_time = Time.now
     @game_time = game_time
     @secret = Secret.new
     @turn = Turn.new
@@ -49,24 +49,29 @@ class Game
   end
 
   def set_start_time
-    @start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    @start_time
   end
 
   def set_end_time
-    @end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    @end_time
   end
 
-  def calculate_game_time
-    #game_time = distance_of_time_in_words(set_start_time, set_end_time)
+  def game_tracker
+    @start_time = Time.now
+    play_game
     @game_time = (set_end_time - set_start_time).round(2)
   end
 
   def play_game
     set_secret_code
-    set_start_time
-
     p  "I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game. What's your guess?"
     @player_guess = gets.chomp.downcase!
+    if @player_guess == "q"
+      p quit
+    elsif @player_guess == "@turn.guess_to_array"
+      set_start_time
+      @guess_counter += 1
+    end
   end
 
   def set_secret_code
@@ -83,9 +88,9 @@ class Game
     add_guess
   end
 
-  def add_guess
-    @guess_counter += 1
-  end
+  # def add_guess
+  #   @guess_counter += 1
+  # end
 
   def end_game
     set_end_time
