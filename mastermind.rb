@@ -2,5 +2,9 @@ require './lib/game'
 require './lib/secret'
 require './lib/turn'
 
-game = Game.new
-game.start_game
+class MASTERMIND
+  def initialize
+    @game = Game.new
+  end
+  start_game
+end
