@@ -19,7 +19,7 @@ class Turn
     elsif guess.match?(/[^"r", "g", "b", "y"]/)
       "Your input had invalid characters."
     else
-      # whatever method comes next!!!
+      evaluate_index
     end
   end
 

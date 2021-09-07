@@ -1,12 +1,11 @@
-require './mastermind'
 require './lib/secret'
 require './lib/turn'
 
 class Game
-  attr_reader :guess_counter, :secret, :game_time, :guess
+  attr_reader :guess_counter, :guess, :start_time, :secret, :turn
   def initialize
     @guess_counter = 0
-    @guess = gets.chomp.downcase!
+    @guess = guess
     @start_time = Time.now
     @secret = Secret.new
     @turn = Turn.new(@secret)
@@ -26,7 +25,7 @@ class Game
   end
 
   def start_game
-    p start_message
+    start_message
     start_game_input
   end
 
@@ -93,7 +92,7 @@ class Game
   end
 
   def end_game
-    if @player_guess == @secret_code
+    if @guess == @secret_code
       p end_game_message
     end
   end

@@ -1,8 +1,8 @@
 require 'rspec'
 require './mastermind'
 require './lib/game'
-require './lib/secret'
-require './lib.turn'
+# require './lib/secret'
+# require './lib.turn'
 
 RSpec.describe Game do
   it 'exists' do
@@ -12,7 +12,7 @@ RSpec.describe Game do
 
   it 'has instructions' do
     game = Game.new
-    expect(game.instructions).to eq("Instructions")
+    expect(game.instructions).to be_a(String)
   end
 
   it 'has a quit' do
@@ -42,7 +42,8 @@ RSpec.describe Game do
 
   it 'counts the number of guesses' do
     game = Game.new
-    expect(game.player_guess).to eq(1)
+    game.add_guess
+    expect(game.guess_counter).to eq(1)
   end
 
   it 'has an end' do
