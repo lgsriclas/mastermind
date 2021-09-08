@@ -5,15 +5,21 @@ class Game
   attr_reader :guess_counter, :start_time, :secret
   def initialize
     @guess_counter = 0
-    #@guess = guess
     @start_time = Time.now
     @secret = Secret.new
-    #@turn = Turn.new(@secret.secret_code, guess)
   end
 
   def instructions
-     "Instructions: I have generated a beginner sequence with four elements made up of: (r)ed,
-     (g)reen, (b)lue, and (y)ellow. The sequence can be generated in any order and in any position.  The same element can also be used more than once.  Make your guess, and I will respond with how many elements you guessed correctly and the correct number of element positions you guessed correctly.  This information can then be used for you to formulate a new guess.  I will keep track of the number of guesses and the time it takes you to guess correctly.  Use (c)heat to receive the generated sequence or (q)uit at any time to end the game.  Good luck!"
+     "Instructions: I have generated a beginner sequence with four elements
+     made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. The sequence can be
+     generated in any order and in any position. The same element can also
+     be used more than once. Make your guess, and I will respond with how
+     many elements you guessed correctly and the correct number of element
+     positions you guessed correctly.  This information can then be used
+     for you to formulate a new guess. I will keep track of the number of
+     guesses and the time it takes you to guess correctly. Use (c)heat to
+     receive the generated sequence or (q)uit at any time to end the game.
+     Good luck!"
   end
 
   def quit
@@ -56,8 +62,8 @@ class Game
 
   def play_game
     set_secret_code
-    p  "I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow.
-        Use (q)uit at any time to end the game. Enter your guess and press return to play"
+    p "I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow.
+    Use (q)uit at any time to end the game. Enter your guess and press return to play"
     player_input = gets.chomp.downcase
     if player_input == "q"
       p quit
@@ -73,7 +79,6 @@ class Game
   end
 
   def set_secret_code
-    #@secret = Secret.new
     @secret.generate_secret_code
   end
 
@@ -84,7 +89,6 @@ class Game
   def evaluate_player_guess
     @guess = gets.chomp.downcase
     turn = Turn.new(@secret.secret_code, @guess)
-    #require "pry"; binding.pry
     turn.guess_to_array
     turn.guess_validation
     turn.evaluate_index

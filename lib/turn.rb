@@ -13,13 +13,12 @@ class Turn
   end
 
   def guess_validation
-    #require "pry"; binding.pry
-    if guess_to_array.length < 4
-      "Guess is too short, try again!"
+    if @guess.downcase.split("").length< 4
+      p "Guess is too short, try again!"
     elsif guess_to_array.length > 4
-      "Guess is too long, try again!"
+      p "Guess is too long, try again!"
     elsif @guess.match?(/[^"r", "g", "b", "y"]/)
-      "Your input had invalid characters."
+      p "Your input had invalid characters."
     else
       evaluate_index
     end
@@ -27,7 +26,6 @@ class Turn
 
   def evaluate_index
     correct_index_counter = 0
-    #secret_code.each_with_index do |letter, i|
     @secret_code.each_with_index do |letter, i|
       if guess_to_array[i] == letter
         correct_index_counter += 1
@@ -38,7 +36,6 @@ class Turn
 
 
   def evaluate_element
-    #second_array = guess_to_array(guess)
     second_array = guess_to_array
     evaluate = @secret_code.&(second_array)
     evaluate.count
