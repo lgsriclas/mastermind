@@ -38,6 +38,7 @@ class Game
   def start_game_input
     player_input = gets.chomp.downcase
     if player_input == "p"
+      set_secret_code
       play_game
     elsif player_input == "i"
       p instructions
@@ -45,11 +46,12 @@ class Game
     elsif player_input == "q"
       p quit
       exit
-    elsif player_input == "c"
-      p cheat
-      start_game_input
     end
-  end 
+  end
+
+  def set_secret_code
+    @secret.generate_secret_code
+  end
 
   def calculate_game_time
     end_time = Time.now
@@ -59,10 +61,13 @@ class Game
     "#{minutes} minutes and #{seconds} seconds."
   end
 
+  def cheat
+    @secret.secret_code
+  end
+
   def play_game
-    set_secret_code
     p "I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow.
-    Use (q)uit at any time to end the game. Enter your guess and press return to play"
+    Use (q)uit at any time to end the game. Press return to enter your guess then press return to play"
     player_input = gets.chomp.downcase
     if player_input == "q"
       p quit
@@ -77,14 +82,6 @@ class Game
     end
   end
 
-  def set_secret_code
-    @secret.generate_secret_code
-  end
-
-  def cheat
-    @secret.secret_code
-  end
-
   def evaluate_player_guess
     @guess = gets.chomp.downcase
     turn = Turn.new(@secret.secret_code, @guess)
@@ -93,7 +90,7 @@ class Game
     turn.evaluate_index
     turn.evaluate_element
     add_guess
-    turn.total_output_to_player
+    turn.total_output_to_player(self)
     play_game
   end
 

@@ -34,19 +34,16 @@ class Turn
     correct_index_counter
   end
 
-
   def evaluate_element
     second_array = guess_to_array
     evaluate = @secret_code.&(second_array)
     evaluate.count
     correct_element_counter = evaluate.count
-    end
+  end
 
-
-  def total_output_to_player
-    game = Game.new
+  def total_output_to_player(game)
     x = evaluate_index
     y = evaluate_element
-    p "#{@guess} has #{y} of the correct elements with #{x} in the correct positions. You have taken #{@guess_counter} guesses."
+    p "#{@guess} has #{y} of the correct elements with #{x} in the correct positions. You have taken #{game.guess_counter} guesses."
   end
 end
