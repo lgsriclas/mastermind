@@ -1,5 +1,5 @@
 require './lib/secret'
-#require './lib/turn'
+require './lib/turn'
 
 class Game
   attr_reader :guess_counter, :start_time, :secret
@@ -49,6 +49,7 @@ class Game
       p cheat
       start_game_input
     end
+  end 
 
   def calculate_game_time
     end_time = Time.now
