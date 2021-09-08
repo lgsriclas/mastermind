@@ -1,5 +1,6 @@
 require './lib/game'
-require './runner/mastermind'
+require './lib/turn'
+
 
 class Secret
 

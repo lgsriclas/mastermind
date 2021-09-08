@@ -1,76 +1,99 @@
-require './runner/mastermind'
 require './lib/secret'
 #require './lib/turn'
 
 class Game
-  attr_reader :turn_counter, :secret, :user_input, :start_time, :end_time, :player_guess, :game_time, :player_input
+  attr_reader :guess_counter, :start_time, :secret
   def initialize
     @guess_counter = 0
-    @secret = []
-    @player_guess = player_guess
-    @start_time = start_time
-    @end_time = end_time
-    @game_time = game_time
-    @player_input = gets.chomp.downcase!
+    @start_time = Time.now
+    @secret = Secret.new
   end
 
   def instructions
-    "Instructions"
+     "Instructions: I have generated a beginner sequence with four elements
+     made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. The sequence can be
+     generated in any order and in any position. The same element can also
+     be used more than once. Make your guess, and I will respond with how
+     many elements you guessed correctly and the correct number of element
+     positions you guessed correctly.  This information can then be used
+     for you to formulate a new guess. I will keep track of the number of
+     guesses and the time it takes you to guess correctly. Use (c)heat to
+     receive the generated sequence or (q)uit at any time to end the game.
+     Good luck!"
   end
 
   def quit
     "You have quit Mastermind"
   end
 
-  def set_secret_code
-    @secret = Secret.new
-    secret.generate_secret_code
-    require "pry"; binding.pry
+  def start_message
+    p "Welcome to MASTERMIND! Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
   end
 
   def start_game
-    player_input = gets.chomp.downcase!
+    start_message
+    start_game_input
+  end
+
+  def start_game_input
+    player_input = gets.chomp.downcase
     if player_input == "p"
       play_game
     elsif player_input == "i"
       p instructions
-      start_game
+      start_game_input
     elsif player_input == "q"
       p quit
       exit
     elsif player_input == "c"
       p cheat
+      start_game_input
     end
-    @player_input
-  end
-
-  def cheat
-    secret.set_secret_code
-  end
-
-  def set_start_time
-    @start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-  end
-
-  def set_end_time
-    @end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-  end
 
   def calculate_game_time
-    #game_time = distance_of_time_in_words(set_start_time, set_end_time)
-    @game_time = (set_end_time - set_start_time).round(2)
+    end_time = Time.now
+    game_time = (end_time - @start_time ).to_i
+    minutes = (game_time / 60).to_i
+    seconds = game_time - minutes * 60
+    "#{minutes} minutes and #{seconds} seconds."
   end
 
   def play_game
     set_secret_code
-    set_start_time
-    #turn = Turn.new
-    p  "I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game. What's your guess?"
+    p "I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow.
+    Use (q)uit at any time to end the game. Enter your guess and press return to play"
+    player_input = gets.chomp.downcase
+    if player_input == "q"
+      p quit
+      exit
+    elsif player_input == "i"
+      p instructions
+      play_game
+    elsif player_input == "c"
+      p cheat
+    else
+      evaluate_player_guess
+    end
   end
 
-  def guess
-    @player_guess = gets.chomp.downcase
+  def set_secret_code
+    @secret.generate_secret_code
+  end
+
+  def cheat
+    @secret.secret_code
+  end
+
+  def evaluate_player_guess
+    @guess = gets.chomp.downcase
+    turn = Turn.new(@secret.secret_code, @guess)
+    turn.guess_to_array
+    turn.guess_validation
+    turn.evaluate_index
+    turn.evaluate_element
     add_guess
+    turn.total_output_to_player
+    play_game
   end
 
   def add_guess
@@ -78,14 +101,13 @@ class Game
   end
 
   def end_game
-    set_end_time
     if @guess == @secret_code
       p end_game_message
     end
   end
 
   def end_game_message
-    p "Congratulations! You guessed the sequence '#{set_secret_code}' in #{turn_counter} guesses over #{calculate_game_time}. Do you want to (p)lay again or (q)uit?"
+    p "Congratulations! You guessed the sequence '#{set_secret_code}' in #{@guess_counter} guesses over #{calculate_game_time}. Do you want to (p)lay again or (q)uit?"
     start_game
   end
 end
