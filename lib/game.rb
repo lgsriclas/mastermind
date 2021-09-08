@@ -2,13 +2,13 @@ require './lib/secret'
 require './lib/turn'
 
 class Game
-  attr_reader :guess_counter, :guess, :start_time, :secret, :turn
+  attr_reader :guess_counter, :start_time, :secret
   def initialize
     @guess_counter = 0
-    @guess = guess
+    #@guess = guess
     @start_time = Time.now
     @secret = Secret.new
-    @turn = Turn.new(@secret)
+    #@turn = Turn.new(@secret.secret_code, guess)
   end
 
   def instructions
@@ -56,21 +56,25 @@ class Game
 
   def play_game
     set_secret_code
-    p  "I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game. Press g to play and then enter your guess."
-    player_input = gets.chomp.downcase!
+    p  "I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow.
+        Use (q)uit at any time to end the game. Enter your guess and press return to play"
+    player_input = gets.chomp.downcase
     if player_input == "q"
       p quit
       exit
     elsif player_input == "i"
       p instructions
-    elsif player_input == "g"
+      play_game
+    elsif player_input == "c"
+      p cheat
+    else
       evaluate_player_guess
     end
   end
 
   def set_secret_code
-    @secret = Secret.new
-    secret.generate_secret_code
+    #@secret = Secret.new
+    @secret.generate_secret_code
   end
 
   def cheat
@@ -78,13 +82,16 @@ class Game
   end
 
   def evaluate_player_guess
-    @guess = gets.chomp.downcase!
-    guess_to_array
-    guess_validation
-    evaluate_index
-    evaluate_element
+    @guess = gets.chomp.downcase
+    turn = Turn.new(@secret.secret_code, @guess)
+    #require "pry"; binding.pry
+    turn.guess_to_array
+    turn.guess_validation
+    turn.evaluate_index
+    turn.evaluate_element
     add_guess
-    total_output_to_player
+    turn.total_output_to_player
+    play_game
   end
 
   def add_guess
