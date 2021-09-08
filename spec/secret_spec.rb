@@ -6,5 +6,4 @@ RSpec.describe Secret do
     secret = Secret.new
     expect(secret.generate_secret_code).to be_a(Array)
   end
-
 end

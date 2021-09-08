@@ -4,7 +4,6 @@ require './lib/secret'
 require './lib/game'
 
 RSpec.describe Turn do
-
   it 'changes guess from string to array' do
     turn = Turn.new("rgby", "rgbb")
     turn.guess_to_array
@@ -46,5 +45,4 @@ RSpec.describe Turn do
     b = turn.evaluate_element
       expect(b).to eq(3)
   end
-
 end

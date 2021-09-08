@@ -1,9 +1,7 @@
 require './lib/game'
 require './lib/turn'
 
-
 class Secret
-
   attr_reader  :secret_code
   def initialize
     @secret_code = secret_code
@@ -13,6 +11,4 @@ class Secret
     possibilities = ["b", "r", "g", "y"]
     @secret_code = 4.times.map {possibilities.sample}
   end
-
-
 end
